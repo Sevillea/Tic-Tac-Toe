@@ -2,19 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+//REACT COMPONENT: Square
+// Need this.state so the Square rcomponant stores the click. 
 class Square extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
     render() {
       return (
-        <button className="square">
-          {/* TODO */}
+        <button 
+        className="square" 
+        onClick={() => this.setState.apply({value: 'X'})} //event handler to store click.
+        >
+          {this.state.value} // Render method 
         </button>
       );
     }
   }
-  
+
+  // REACT COMPONENT subclass: Board
   class Board extends React.Component {
     renderSquare(i) {
-      return <Square />;
+      return <Square value={i} />; // passing a prop called value to the Square component
     }
   
     render() {
@@ -42,7 +54,7 @@ class Square extends React.Component {
       );
     }
   }
-  
+//   REACT COMPONENT: GAME
   class Game extends React.Component {
     render() {
       return (
