@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import '../src.style.css'
 
 //REACT COMPONENT: Square
 // Need this.state so the Square rcomponant stores the click. 
@@ -15,19 +15,29 @@ class Square extends React.Component {
       return (
         <button 
         className="square" 
-        onClick={() => this.setState.apply({value: 'X'})} //event handler to store click.
+        onClick={() => this.props.onClick({value: 'X'})} //event handler to store click.
         >
-          {this.state.value} // Render method 
+          {this.props.value} // Render method 
         </button>
       );
     }
   }
 
   // REACT COMPONENT subclass: Board
+  // lifting state into the parent component. 
+  // Board component to maintain which squares are filled. 
   class Board extends React.Component {
-    renderSquare(i) {
-      return <Square value={i} />; // passing a prop called value to the Square component
+    constructor(props){
+      super(props);
+      this.state = {
+        square: Array(9).fill(null), // array of 9 nulls. 
+      };
     }
+    renderSquare(i) { 
+      return <Square value={this.state.squares[i]} 
+      onClick={() => this.handleclick(i)}  
+      />; // passing a prop called value to the Square component
+    };
   
     render() {
       const status = 'Next player: X';
