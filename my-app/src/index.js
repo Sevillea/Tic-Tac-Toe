@@ -1,21 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '../src.style.css'
+import './index.css';
 
 //REACT COMPONENT: Square
 // Need this.state so the Square rcomponant stores the click. 
-class Square extends React.Component {
-    render() {
-      return (
-        <button 
-        className="square" 
-        onClick={() => this.props.onClick({value: 'X'})} //event handler to store click.
-        >
-          {this.props.value} // Render method 
-        </button>
-      );
-    }
-  }
+function Square (props) {
+  return (
+    <button className="square" onclick={props.onclick}>
+    {props.value}
+    </button>
+  );
+}
 
   // REACT COMPONENT subclass: Board
   // lifting state into the parent component. 
@@ -27,10 +22,17 @@ class Square extends React.Component {
         square: Array(9).fill(null), // array of 9 nulls. 
       };
     }
+    handleClick(i) {
+      const squares = this.state.squares.slice(); 
+      squares[i] = 'X';
+      this.setState({squares: squares});
+    }
+
+
     renderSquare(i) { 
       return <Square value={this.state.squares[i]} 
       onClick={() => this.handleclick(i)}  
-      />; // passing a prop called value to the Square component
+      />; 
     };
   
     render() {
