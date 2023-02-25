@@ -5,12 +5,6 @@ import '../src.style.css'
 //REACT COMPONENT: Square
 // Need this.state so the Square rcomponant stores the click. 
 class Square extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
     render() {
       return (
         <button 
